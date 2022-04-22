@@ -13,6 +13,13 @@ const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 
 var dificultad = -1;
+var random;
+
+function numeroAleatorio(){
+    random = Math.floor(Math.random() * (5 - 0) + 0)
+    console.log(random)
+    return random
+}
 
 async function getapi(url) {
   const response = await fetch(url);
@@ -28,56 +35,50 @@ function aumentarDificultad() {
 async function misPreguntasPorNivel() {
   const preguntas = await getapi(api_url);
   let preguntasPorDificultad = [];
-
+  
   for (i = 0; i < preguntas.length; i++) {
     let dificultadarreglo = parseInt(preguntas[i].difficulty);
-
     if (dificultadarreglo == dificultad) {
       preguntasPorDificultad.push(preguntas[i]);
     }
   }
-
-  let random = Math.floor(Math.random() * (5 - 0) + 0);
-  return preguntasPorDificultad[random];
+  return preguntasPorDificultad[this.random];
 }
 
 async function cargarPregunta() {
-  const pregunta = await misPreguntasPorNivel();
-  console.log(pregunta);
+  const pregunta = await misPreguntasPorNivel(this.random);
   questionElement.innerText = pregunta.question;
   answeraButton.innerText = pregunta.asnwera;
   answerbButton.innerText = pregunta.asnwerb;
   answercButton.innerText = pregunta.asnwerc;
   answerdButton.innerText = pregunta.asnwerd;
+  return pregunta;
 }
 
-function startGame() {
+async function startGame() {
   startButton.classList.add("hide");
-  scoreButton.classList.add("hide")
-  restartButton.classList.add("hide")
-  exitButton.classList.remove("hide")
+  scoreButton.classList.add("hide");
+  restartButton.classList.add("hide");
+  exitButton.classList.remove("hide");
   questionContainerElement.classList.remove("hide");
   aumentarDificultad();
-  cargarPregunta();
-}
-
-async function ejecutar() {
-  aumentarDificultad();
-  cargarPregunta();
+  numeroAleatorio();
+  cargarPregunta(random);
 }
 
 async function respuesta(clickID) {
-  const pregunta = await misPreguntasPorNivel();
+  const pregunta = await cargarPregunta(this.random);
   const idboton = document.getElementById(clickID).id;
 
   if (idboton == pregunta.correctanswer) {
     aumentarDificultad();
+    numeroAleatorio();
     cargarPregunta();
   } else {
     questionContainerElement.classList.add("hide");
-    scoreButton.classList.add("hide")
-    restartButton.classList.remove("hide")
-    saveButton.classList.remove("hide")
-    exitButton.classList.add("hide")
+    scoreButton.classList.add("hide");
+    restartButton.classList.remove("hide");
+    saveButton.classList.remove("hide");
+    exitButton.classList.add("hide");
   }
 }
