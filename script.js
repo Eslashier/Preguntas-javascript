@@ -52,6 +52,7 @@ async function cargarPregunta() {
   answerbButton.innerText = pregunta.asnwerb;
   answercButton.innerText = pregunta.asnwerc;
   answerdButton.innerText = pregunta.asnwerd;
+  console.log(pregunta.correctanswer + " respuesta")
   return pregunta;
 }
 
@@ -70,10 +71,15 @@ async function respuesta(clickID) {
   const pregunta = await cargarPregunta(this.random);
   const idboton = document.getElementById(clickID).id;
 
+  console.log("contador " + dificultad)
+
   if (idboton == pregunta.correctanswer) {
     aumentarDificultad();
     numeroAleatorio();
     cargarPregunta();
+    if(dificultad==4) {
+      saveButton.classList.remove("hide");
+    }
   } else {
     questionContainerElement.classList.add("hide");
     scoreButton.classList.add("hide");
@@ -82,3 +88,15 @@ async function respuesta(clickID) {
     exitButton.classList.add("hide");
   }
 }
+
+function saveScore(){
+  const puntaje = (dificultad)*1000
+  console.log(puntaje)
+  const texto_puntaje = document.querySelector("#saveScore")
+  texto_puntaje.innerHTML=`Tu puntaje fue: ${puntaje}`
+  return puntaje
+}
+
+console.log(puntaje + "Puntaje final: ")
+saveButton.addEventListener("click", saveScore)
+restartButton.addEventListener("click",startGame)

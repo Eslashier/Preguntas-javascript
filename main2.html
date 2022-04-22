@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="styles.css" rel="stylesheet">>
-  <script defer src="script.js"></script>
+  <link href="styles.css" rel="stylesheet">
   <title>Quiz App</title>
 </head>
 <body>
@@ -23,11 +22,13 @@
     <div class="controls">
       <button onclick="startGame()" id="start-btn" class="start-btn btn">Nuevo juego</button>
       <button onclick="score()" id="score-btn" class="start-btn btn" >Puntaje</button>
-      <button id="restart-btn" class="start-btn btn hide">Reiniciar</button>
-      <button id="save-btn" class="start-btn btn hide">Guardar puntuacion</button>
+      <button onclick="starGame()" id="restart-btn" class="start-btn btn hide">Reiniciar</button>
+      <button onclick="saveScore()" id="save-btn" class="start-btn btn hide">Guardar puntuacion</button>
       <button id="exit-btn" class="start-btn btn hide">Salir</button>
     </div>
+    <div id="saveScore"></div>
 
   </div>
 </body>
+<script defer src="script.js"></script>
 </html>
