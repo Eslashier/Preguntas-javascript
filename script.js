@@ -11,6 +11,7 @@ const answerdButton = document.getElementById("d");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
+const containerPuntaje = document.getElementById("container-puntaje");
 document.onkeydown = fkey;
 
 var dificultad = -1;
@@ -89,6 +90,7 @@ async function startGame() {
   restartButton.classList.add("hide");
   exitButton.classList.remove("hide");
   questionContainerElement.classList.remove("hide");
+  containerPuntaje.classList.add("hide");
   aumentarDificultad();
   numeroAleatorio();
   cargarPregunta(random);
@@ -109,10 +111,11 @@ async function respuesta(clickID) {
     }
   } else {
     questionContainerElement.classList.add("hide");
-    scoreButton.classList.add("hide");
+    scoreButton.classList.remove("hide");
     restartButton.classList.remove("hide");
     saveButton.classList.remove("hide");
     exitButton.classList.add("hide");
+
   }
 }
 
@@ -121,18 +124,42 @@ function saveScore() {
   idJugador += 1;
   const puntaje = (dificultad) * 1000
   console.log(puntaje)
-  const texto_puntaje = document.querySelector("#saveScore")
+  //const texto_puntaje = document.querySelector("#saveScore")
   let nombre = prompt("Cual es tu nombre: ", "")
   let jsonJugador = {
     "nombre": nombre,
     "puntaje": puntaje
   }
   localStorage.setItem(idJugador, JSON.stringify(jsonJugador));
-  texto_puntaje.innerHTML = `${nombre} Tu puntaje fue: ${puntaje}`
+  //texto_puntaje.innerHTML = `${nombre} Tu puntaje fue: ${puntaje}`
 
   return puntaje
 }
 
+function score() {
+  console.log("ingresoP");
+  let table = '<tr><th>Id Jugador</th><th>Nombre Jugador</th><th>Puntaje Jugador</th></tr>'
+  for (i = 1; i < 10000; i++) {
+    let jsonJugador = JSON.parse(localStorage.getItem(i));
+    console.log(jsonJugador);
+    if (jsonJugador == undefined) {
+      break;
+    }
+    table += `<tr>
+                        <td>${i}</td>
+                        <td>${jsonJugador.nombre}</td>
+                        <td>${jsonJugador.puntaje}</td>
+                        </tr>`
+  }
+  exitButton.classList.remove("hide");
+  questionContainerElement.classList.add("hide");
+  startButton.classList.add("hide");
+  scoreButton.classList.add("hide");
+  document.getElementById("puntaje").innerHTML = table
+  containerPuntaje.classList.remove("hide");
+  saveButton.classList.add("hide");
+}
+
 console.log(puntaje + "Puntaje final: ")
-saveButton.addEventListener("click", saveScore)
+//saveButton.addEventListener("click", saveScore)
 restartButton.addEventListener("click", startGame)
