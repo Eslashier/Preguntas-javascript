@@ -11,14 +11,31 @@ const answerdButton = document.getElementById("d");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
+document.onkeydown = fkey;
 
 var dificultad = -1;
 var random;
+var idJugador = 0;
 
-function numeroAleatorio(){
-    random = Math.floor(Math.random() * (5 - 0) + 0)
-    console.log(random)
-    return random
+var wasPressed = false;
+
+function fkey(e) {
+  e = e || window.event;
+  if (wasPressed) return;
+
+  if (e.keyCode == 116) {
+    //alert("f5 pressed");
+    wasPressed = true;
+    localStorage.clear();
+  } else {
+    //alert("Window closed");
+  }
+}
+
+function numeroAleatorio() {
+  random = Math.floor(Math.random() * (5 - 0) + 0)
+  console.log(random)
+  return random
 }
 
 async function getapi(url) {
@@ -35,7 +52,7 @@ function aumentarDificultad() {
 async function misPreguntasPorNivel() {
   const preguntas = await getapi(api_url);
   let preguntasPorDificultad = [];
-  
+
   for (i = 0; i < preguntas.length; i++) {
     let dificultadarreglo = parseInt(preguntas[i].difficulty);
     if (dificultadarreglo == dificultad) {
@@ -56,7 +73,17 @@ async function cargarPregunta() {
   return pregunta;
 }
 
+function salirJuego() {
+  dificultad = -1;
+  startButton.classList.remove("hide");
+  scoreButton.classList.remove("hide");
+  questionContainerElement.classList.add("hide");
+  exitButton.classList.add("hide");
+  saveButton.classList.add("hide");
+}
+
 async function startGame() {
+  dificultad = -1;
   startButton.classList.add("hide");
   scoreButton.classList.add("hide");
   restartButton.classList.add("hide");
@@ -77,7 +104,7 @@ async function respuesta(clickID) {
     aumentarDificultad();
     numeroAleatorio();
     cargarPregunta();
-    if(dificultad==4) {
+    if (dificultad == 4) {
       saveButton.classList.remove("hide");
     }
   } else {
@@ -89,14 +116,23 @@ async function respuesta(clickID) {
   }
 }
 
-function saveScore(){
-  const puntaje = (dificultad)*1000
+function saveScore() {
+
+  idJugador += 1;
+  const puntaje = (dificultad) * 1000
   console.log(puntaje)
   const texto_puntaje = document.querySelector("#saveScore")
-  texto_puntaje.innerHTML=`Tu puntaje fue: ${puntaje}`
+  let nombre = prompt("Cual es tu nombre: ", "")
+  let jsonJugador = {
+    "nombre": nombre,
+    "puntaje": puntaje
+  }
+  localStorage.setItem(idJugador, JSON.stringify(jsonJugador));
+  texto_puntaje.innerHTML = `${nombre} Tu puntaje fue: ${puntaje}`
+
   return puntaje
 }
 
 console.log(puntaje + "Puntaje final: ")
 saveButton.addEventListener("click", saveScore)
-restartButton.addEventListener("click",startGame)
+restartButton.addEventListener("click", startGame)
