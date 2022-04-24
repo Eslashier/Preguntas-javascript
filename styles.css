@@ -96,3 +96,32 @@ body.wrong {
 .score {
   text-align: right;
 }
+
+.score {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#puntaje {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#puntaje td, #puntaje th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#puntajet:nth-child(even){background-color: #f2f2f2;}
+
+#puntaje tr:hover {background-color: #ddd;}
+
+#puntaje th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #00AAFF;
+  color: white;
+}

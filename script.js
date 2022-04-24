@@ -86,6 +86,7 @@ function salirJuego() {
   saveButton.classList.add("hide");
   menupostjuego.classList.add("hide");
   salir.classList.add("hide");
+  containerPuntaje.classList.add("hide");
 }
 
 async function startGame() {
@@ -163,7 +164,7 @@ function score() {
   }
   menuinicial.classList.add("hide");
   menupostjuego.classList.add("hide");
-  exitButton.classList.remove("hide");
+  salir.classList.remove("hide");
   questionContainerElement.classList.add("hide");
   document.getElementById("puntaje").innerHTML = table
   containerPuntaje.classList.remove("hide");
