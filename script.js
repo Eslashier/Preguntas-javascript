@@ -17,6 +17,7 @@ const menupostjuego = document.getElementById("menupostjuego")
 const salir = document.getElementById("salir")
 const levelonscreen = document.getElementById("levelonscreen")
 const scoreonscreen = document.getElementById("scoreonscreen")
+const ganar = document.getElementById("ganar")
 document.onkeydown = fkey;
 
 var dificultad = -1;
@@ -40,7 +41,6 @@ function fkey(e) {
 
 function numeroAleatorio() {
   random = Math.floor(Math.random() * (5 - 0) + 0)
-  console.log(random)
   return random
 }
 
@@ -52,6 +52,15 @@ async function getapi(url) {
 
 function aumentarDificultad() {
   dificultad++;
+  console.log(dificultad);
+  if (dificultad == 5){
+    questionContainerElement.classList.add("hide");
+    scoreButton.classList.remove("hide");
+    saveButton.classList.remove("hide");
+    exitButton.classList.remove("hide");
+    menupostjuego.classList.remove("hide")
+    ganar.classList.remove("hide")
+  }
   return dificultad;
 }
 
@@ -99,6 +108,7 @@ async function startGame() {
   restartButton.classList.add("hide")
   salir.classList.remove("hide")
   saveButton.classList.add("hide");
+  ganar.classList.add("hide")
   levelonscreen.innerHTML = "Nivel: 1";
   scoreonscreen.innerHTML = "Puntuacion: 0";
   aumentarDificultad();
@@ -120,6 +130,7 @@ async function respuesta(clickID) {
       saveButton.classList.remove("hide");
     }
   } else {
+    ganar.classList.add("hide")
     questionContainerElement.classList.add("hide");
     scoreButton.classList.remove("hide");
     restartButton.classList.remove("hide");
@@ -162,6 +173,7 @@ function score() {
                         <td>${jsonJugador.puntaje}</td>
                         </tr>`
   }
+  ganar.classList.add("hide")
   menuinicial.classList.add("hide");
   menupostjuego.classList.add("hide");
   salir.classList.remove("hide");
