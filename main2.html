@@ -12,37 +12,52 @@
 <body>
   <div class="container">
     <div id="question-container" class="hide">
-      <div id="dificiltad">Dificultad</div>
-      <div id="question">Question</div>
+      <div class="btn-grid">
+        <div id="levelonscreen" class="upperinfo"></div>
+        <div id="scoreonscreen" class="score upperinfo"></div>
+      </div>
+      <div id="question" class="center">Question</div>
       <div id="answer-buttons" class="btn-grid">
-        <button onclick="respuesta((this.id))" id="a" class="btn">Answer 1</button>
-        <button onclick="respuesta((this.id))" id="b" class="btn">Answer 2</button>
-        <button onclick="respuesta((this.id))" id="c" class="btn">Answer 3</button>
-        <button onclick="respuesta((this.id))" id="d" class="btn">Answer 4</button>
+        <button onclick="respuesta(this.id)" id="a" class="btn">Answer 1</button>
+        <button onclick="respuesta(this.id)" id="b" class="btn">Answer 2</button>
+        <button onclick="respuesta(this.id)" id="c" class="btn">Answer 3</button>
+        <button onclick="respuesta(this.id)" id="d" class="btn">Answer 4</button>
       </div>
     </div>
-    <div class="controls">
-      <button onclick="startGame()" id="start-btn" class="start-btn btn">Nuevo juego</button>
-      &nbsp;
-      &nbsp;
-      <button onclick="score()" id="score-btn" class="start-btn btn">Puntaje</button>
-      &nbsp;
-      &nbsp;
-      <button onclick="startGame()" id="restart-btn" class="start-btn btn hide">Reiniciar</button>
-      &nbsp;
-      &nbsp;
-      <button onclick="saveScore()" id="save-btn" class="start-btn btn hide">Guardar puntuacion</button>
-      &nbsp;
-      &nbsp;
-      <button onclick="salirJuego()" id="exit-btn" class="start-btn btn hide">Salir</button>
+    <div id="menuinicial">
+      <div class="controls">
+        <button onclick="startGame()" id="start-btn" class="start-btn btn">Nuevo juego</button>
+      </div>
+      <p></p>
+      <div class="controls">
+        <button onclick="score()" id="score-btn" class="start-btn btn">Puntaje</button>
+      </div>
     </div>
-    <!-- <div id="saveScore"></div> -->
-
-    <div id="container-puntaje" class="hide">
-      <table id="puntaje" border="1" align="center">
-        
+    <div id="menupostjuego" class="hide">
+      <div id="postgame" class="postcontrols">
+        <button onclick="startGame()" id="restart-btn" class="start-btn btn">Reiniciar</button>
+      </div>
+      <p></p>
+      <div id="postgame" class="postcontrols">
+        <button onclick="saveScore()" id="save-btn" class="start-btn btn">Guardar puntuacion</button>
+      </div>
+      <p></p>
+      <div class="controls">
+        <button onclick="score()" id="score-btn" class="start-btn btn">Puntaje</button>
+      </div>
+      <p></p>
+      <div class="postcontrols hide">
+        <button onclick="salirJuego()" id="exit-btn" class="start-btn btn">Salir</button>
+      </div>
+    </div>
+    <div id="container-puntaje" class="hide" allign="center">
+      <table id="puntaje" border="1" allign="center">
       </table>
     </div>
+    <div id="salir" class="postcontrols hide">
+      <button onclick="salirJuego()" id="exit-btn" class="start-btn btn">Salir</button>
+    </div>
+
 
 </body>
 <script defer src="script.js"></script>

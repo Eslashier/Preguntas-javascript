@@ -12,6 +12,11 @@ const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const containerPuntaje = document.getElementById("container-puntaje");
+const menuinicial = document.getElementById("menuinicial")
+const menupostjuego = document.getElementById("menupostjuego")
+const salir = document.getElementById("salir")
+const levelonscreen = document.getElementById("levelonscreen")
+const scoreonscreen = document.getElementById("scoreonscreen")
 document.onkeydown = fkey;
 
 var dificultad = -1;
@@ -70,27 +75,31 @@ async function cargarPregunta() {
   answerbButton.innerText = pregunta.asnwerb;
   answercButton.innerText = pregunta.asnwerc;
   answerdButton.innerText = pregunta.asnwerd;
-  console.log(pregunta.correctanswer + " respuesta")
   return pregunta;
 }
 
 function salirJuego() {
   dificultad = -1;
-  startButton.classList.remove("hide");
-  scoreButton.classList.remove("hide");
+  menuinicial.classList.remove("hide");
   questionContainerElement.classList.add("hide");
   exitButton.classList.add("hide");
   saveButton.classList.add("hide");
+  menupostjuego.classList.add("hide");
+  salir.classList.add("hide");
 }
 
 async function startGame() {
   dificultad = -1;
-  startButton.classList.add("hide");
-  scoreButton.classList.add("hide");
-  restartButton.classList.add("hide");
+  menuinicial.classList.add("hide");
   exitButton.classList.remove("hide");
   questionContainerElement.classList.remove("hide");
   containerPuntaje.classList.add("hide");
+  menupostjuego.classList.add("hide");
+  restartButton.classList.add("hide")
+  salir.classList.remove("hide")
+  saveButton.classList.add("hide");
+  levelonscreen.innerHTML = "Nivel: 1";
+  scoreonscreen.innerHTML = "Puntuacion: 0";
   aumentarDificultad();
   numeroAleatorio();
   cargarPregunta(random);
@@ -100,12 +109,12 @@ async function respuesta(clickID) {
   const pregunta = await cargarPregunta(this.random);
   const idboton = document.getElementById(clickID).id;
 
-  console.log("contador " + dificultad)
-
   if (idboton == pregunta.correctanswer) {
     aumentarDificultad();
     numeroAleatorio();
     cargarPregunta();
+    levelonscreen.innerHTML = "Nivel: " +(parseInt(this.dificultad)+1);
+    scoreonscreen.innerHTML = "Puntuacion: "+(parseInt(this.dificultad)*1000);
     if (dificultad == 4) {
       saveButton.classList.remove("hide");
     }
@@ -114,7 +123,8 @@ async function respuesta(clickID) {
     scoreButton.classList.remove("hide");
     restartButton.classList.remove("hide");
     saveButton.classList.remove("hide");
-    exitButton.classList.add("hide");
+    exitButton.classList.remove("hide");
+    menupostjuego.classList.remove("hide")
 
   }
 }
@@ -151,15 +161,12 @@ function score() {
                         <td>${jsonJugador.puntaje}</td>
                         </tr>`
   }
+  menuinicial.classList.add("hide");
+  menupostjuego.classList.add("hide");
   exitButton.classList.remove("hide");
   questionContainerElement.classList.add("hide");
-  startButton.classList.add("hide");
-  scoreButton.classList.add("hide");
   document.getElementById("puntaje").innerHTML = table
   containerPuntaje.classList.remove("hide");
-  saveButton.classList.add("hide");
 }
 
-console.log(puntaje + "Puntaje final: ")
-//saveButton.addEventListener("click", saveScore)
 restartButton.addEventListener("click", startGame)
