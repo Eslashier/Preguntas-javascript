@@ -18,6 +18,7 @@ const salir = document.getElementById("salir")
 const levelonscreen = document.getElementById("levelonscreen")
 const scoreonscreen = document.getElementById("scoreonscreen")
 const ganar = document.getElementById("ganar")
+const perder = document.getElementById("perder")
 document.onkeydown = fkey;
 
 var dificultad = -1;
@@ -96,6 +97,8 @@ function salirJuego() {
   menupostjuego.classList.add("hide");
   salir.classList.add("hide");
   containerPuntaje.classList.add("hide");
+  ganar.classList.add("hide")
+  perder.classList.add("hide")
 }
 
 async function startGame() {
@@ -109,6 +112,7 @@ async function startGame() {
   salir.classList.remove("hide")
   saveButton.classList.add("hide");
   ganar.classList.add("hide")
+  perder.classList.add("hide")
   levelonscreen.innerHTML = "Nivel: 1";
   scoreonscreen.innerHTML = "Puntuacion: 0";
   aumentarDificultad();
@@ -137,6 +141,7 @@ async function respuesta(clickID) {
     saveButton.classList.remove("hide");
     exitButton.classList.remove("hide");
     menupostjuego.classList.remove("hide")
+    perder.classList.remove("hide")
 
   }
 }
@@ -174,6 +179,7 @@ function score() {
                         </tr>`
   }
   ganar.classList.add("hide")
+  perder.classList.add("hide")
   menuinicial.classList.add("hide");
   menupostjuego.classList.add("hide");
   salir.classList.remove("hide");
