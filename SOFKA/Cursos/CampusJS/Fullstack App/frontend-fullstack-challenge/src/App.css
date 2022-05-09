@@ -1,0 +1,126 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #C3CED3 ;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  font-size: calc(10px + 2vmin);
+}
+
+h1{
+  text-align: left;
+  color: #003752  ;
+  font-size: 2.5em;
+  font-weight: 500;
+  font-family: fantasy;
+}
+
+
+button {
+  background-color: #003752  ;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.button1{
+  margin: 4px 10px;
+}
+
+input[type=text] {
+  border: 2px solid #003752  ;
+  border-radius: 4px;
+  width: 25%;
+  padding: 12px 10px;
+  margin: 8px 0;
+  font-size: 1em;
+}
+
+.solid {
+  border-style: solid;
+  border-color: #003752  ;
+  background-color:#C3CED3    ;
+  border-radius: px;
+  width: 40%;
+  padding: 5px 10px;
+  
+}
+
+.div1{
+  border-style: solid;
+  border-color: #003752 ;
+  background-color:#C3CED3   ;
+  border-radius: 8px;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.div2{
+  border-style: solid;
+  border-color: #003752   ;
+  background-color:#C3CED3    ;
+  border-radius: 8px;
+  width: 70%;
+  padding: 5px 10px;
+}
+
+* {
+  font-family: 'Montserrat', fantasy;
+  font-weight: 900;
+}
+
+.checkMark {
+  height: 18px;
+  width: 18px;
+  margin: 0 10px;
+}
+
+
